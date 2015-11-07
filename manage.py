@@ -17,15 +17,9 @@ app.register_blueprint(dendrite,  url_prefix='/dendrite')
 app.register_blueprint(person_blueprint, url_prefix='/dendrite/person')
 
 
-manager = Manager(app)
-manager.add_command("runserver", Server(
-    use_debugger=True,
-    use_reloader=True,
-    host='0.0.0.0',
-    port=1337,
-    threaded=True))
+app.debug = True
 
+from gevent.wsgi import WSGIServer
 
-if __name__ == '__main__':
-    app.debug = True
-    manager.run()
+http_server = WSGIServer(('', 1337), app)
+http_server.serve_forever()
