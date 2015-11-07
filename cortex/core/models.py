@@ -39,8 +39,9 @@ class DataBlock(Document, CortexDocument):
     # this timestamp referes to the timestamp of the
     # device colecting the data
 
-    source_timestamp = ComplexDateTimeField(required=False)
+    source_timestamp = ListField(ComplexDateTimeField())
     channel_name = StringField()
+    channel_type = StringField()
     data = ListField(FloatField())
 
     def __unicode__(self):

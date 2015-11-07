@@ -27,7 +27,7 @@ class DetailView(MethodView):
             "tp10": [],
             "fp1": [],
             "fp2": [],
-            'time': [],
+            'timestamp': [],
         }
         return render_template('person/detail.html',
                                 person=person, page='person', data=json.dumps(dummy_data))

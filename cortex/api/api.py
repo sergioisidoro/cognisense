@@ -1,4 +1,6 @@
 import redis
+import json
+import datetime
 
 from flask import Flask, request, Response
 from flask_restful import Resource, Api
@@ -12,25 +14,39 @@ except:
 
 
 from cortex.api.event_stream import event_stream
-# from cortex.core.models import DataBlock as DataBlockModel
+from cortex.core.models import DataBlock as DataBlockModel
 
 app = Flask(__name__)
 api = Api(app)
 red = redis.StrictRedis()
 
+app.config['MONGODB_SETTINGS'] = {'db': 'cognisense', 'alias': 'default'}
+
+epoch = datetime.datetime.utcfromtimestamp(0)
+
+def unix_to_datetime(x):
+    return datetime.datetime.fromtimestamp(int(x))
 
 class DataBlock(Resource):
     def get(self, todo_id):
         return {todo_id: "None"}
 
     def post(self, todo_id):
-        red.publish("patient1", request.data)
+        if request.data:
+            red.publish("patient1", request.data)
+            print request.data
+            data = json.loads(request.data)
 
-        timestamp_data = request.data.pop("timestamps")
-        data_type = request.data.pop("type")
-        
-        for team, runs in request.data.iteritems():
-            pass
+            timestamp_data = data.pop("timestamps", None)
+            data_type = data.pop("type", None)
+
+            for key, value in data.iteritems():
+                d = DataBlockModel(
+                    #source_timestamp=map(unix_to_datetime, timestamp_data),
+                    channel_name=key,
+                    channel_type=data_type,
+                    data=value)
+                #d.save()
 
         return "cool, thanks bro!", 201
 

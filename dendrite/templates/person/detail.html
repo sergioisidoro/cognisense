@@ -81,6 +81,7 @@ Detailed report
 <script type="text/javascript">
 
   var graphData = {{data|safe}};
+  var window_size = 500
 
   var tp9 = {
       key : 'TP9',
@@ -106,6 +107,9 @@ Detailed report
   };
 
   var chart = nv.models.cumulativeLineChart();
+  d3.rebind('useVoronoi');
+  chart.useVoronoi(false);
+
   chart.xAxis
       .tickFormat(function(d) {
             return d3.time.format('%x')(new Date(d))
@@ -116,18 +120,36 @@ Detailed report
   function loadGraph(chart_name) {
     d3.select('#' + chart_name + ' svg')
         .datum([window[chart_name]])
-      .transition().duration(500)
+      .transition().duration(1)
         .call(chart);
     nv.utils.windowResize(chart.update);
     return chart;
   };
 
-  for (i = 0; i < graphData.tp9.length; i++) {
-      tp9.values.push({x: new Date(graphData.timestamp[i]), y:graphData.tp9[i]});
-      tp10.values.push({x: new Date(graphData.timestamp[i]), y:graphData.tp10[i]});
-      fp1.values.push({x: new Date(graphData.timestamp[i]), y:graphData.fp1[i]});
-      fp2.values.push({x: new Date(graphData.timestamp[i]), y:graphData.fp2[i]});
+  function update_data(data) {
+    // This is Shameful coding ! I'm sorry!
+    for (i = 0; i < data.timestamp.length; i++) {
+      tp9.values.push({x: new Date(data.timestamp[i]), y:data.tp9[i]});
+      tp10.values.push({x: new Date(data.timestamp[i]), y:data.tp10[i]});
+      fp1.values.push({x: new Date(data.timestamp[i]), y:data.fp1[i]});
+      fp2.values.push({x: new Date(data.timestamp[i]), y:data.fp2[i]});
+    };
+
+    if (fp2.values.length >= window_size){
+      fp2.values.slice(fp2.values.length-window_size, 0);};
+
+    if (fp1.values.length >= window_size){
+      fp1.values.slice(fp1.values.length-window_size, 0);
+    };
+    if (tp10.values.length >= window_size){
+      tp10.values.slice(tp10.values.length-window_size, 0);
+    };
+    if (tp9.values.length >= window_size){
+      tp9.values.slice(tp9.values.length-window_size, 0);
+    };
   }
+
+  update_data(graphData)
 
   nv.addGraph(loadGraph("tp9"))
   nv.addGraph(loadGraph("tp10"))
@@ -139,12 +161,7 @@ Detailed report
   source.onmessage = function (event) {
       if (event.data != 1){
         var data= JSON.parse(event.data);
-        for (i = 0; i < data.timestamp.length; i++) {
-            tp9.values.push({x: new Date(data.timestamp[i]), y:data.tp9[i]});
-            tp10.values.push({x: new Date(data.timestamp[i]), y:data.tp10[i]});
-            fp1.values.push({x: new Date(data.timestamp[i]), y:data.fp1[i]});
-            fp2.values.push({x: new Date(data.timestamp[i]), y:data.fp2[i]});
-        }
+        update_data(data)
         loadGraph("tp9");
         loadGraph("tp10");
         loadGraph("fp1");

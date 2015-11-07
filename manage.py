@@ -8,6 +8,9 @@ from flask.ext.script import Manager, Server
 
 from dendrite.blueprint import dendrite
 from dendrite.views.person import person_blueprint
+from mongoengine import *
+
+connect('tumblelog')
 
 logger = getLogger('watson.run')
 
