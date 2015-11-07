@@ -1,0 +1,29 @@
+{% if not is_xhr|default(false) %}
+{% extends "base.html" %}
+{% endif -%}
+
+{% block section %}
+{{person.signature_name.decode("utf-8") }}
+{% endblock %}
+
+{% block subsection %}
+Detailed report
+{% endblock %}
+
+{% block content %}
+    <div id="dashboard">
+        <div class="box cpu">
+            <div class="box-header">
+                <span>Identity</span>
+            </div>
+            <div class="box-content">
+                <table class="table">
+                    <tr>
+                        <td class="label-col">Load average</td>
+                        <td>Somethin</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
