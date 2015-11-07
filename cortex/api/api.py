@@ -12,6 +12,7 @@ except:
 
 
 from cortex.api.event_stream import event_stream
+# from cortex.core.models import DataBlock as DataBlockModel
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,8 +26,11 @@ class DataBlock(Resource):
     def post(self, todo_id):
         red.publish("patient1", request.data)
 
-        timestamp_data = request.data["TimeStamps"]
-
+        timestamp_data = request.data.pop("timestamps")
+        data_type = request.data.pop("type")
+        
+        for team, runs in request.data.iteritems():
+            pass
 
         return "cool, thanks bro!", 201
 

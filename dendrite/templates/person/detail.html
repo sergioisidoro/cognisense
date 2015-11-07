@@ -123,10 +123,10 @@ Detailed report
   };
 
   for (i = 0; i < graphData.tp9.length; i++) {
-      tp9.values.push({x: new Date(graphData.time[i]), y:graphData.tp9[i]});
-      tp10.values.push({x: new Date(graphData.time[i]), y:graphData.tp10[i]});
-      fp1.values.push({x: new Date(graphData.time[i]), y:graphData.fp1[i]});
-      fp2.values.push({x: new Date(graphData.time[i]), y:graphData.fp2[i]});
+      tp9.values.push({x: new Date(graphData.timestamp[i]), y:graphData.tp9[i]});
+      tp10.values.push({x: new Date(graphData.timestamp[i]), y:graphData.tp10[i]});
+      fp1.values.push({x: new Date(graphData.timestamp[i]), y:graphData.fp1[i]});
+      fp2.values.push({x: new Date(graphData.timestamp[i]), y:graphData.fp2[i]});
   }
 
   nv.addGraph(loadGraph("tp9"))
@@ -139,11 +139,11 @@ Detailed report
   source.onmessage = function (event) {
       if (event.data != 1){
         var data= JSON.parse(event.data);
-        for (i = 0; i < data.TimeStamp.length; i++) {
-            tp9.values.push({x: new Date(data.TimeStamps[i]), y:data.TP9[i]});
-            tp10.values.push({x: new Date(data.TimeStamps[i]), y:data.TP10[i]});
-            fp1.values.push({x: new Date(data.TimeStamps[i]), y:data.FP1[i]});
-            fp2.values.push({x: new Date(data.TimeStamps[i]), y:data.FP2[i]});
+        for (i = 0; i < data.timestamp.length; i++) {
+            tp9.values.push({x: new Date(data.timestamp[i]), y:data.tp9[i]});
+            tp10.values.push({x: new Date(data.timestamp[i]), y:data.tp10[i]});
+            fp1.values.push({x: new Date(data.timestamp[i]), y:data.fp1[i]});
+            fp2.values.push({x: new Date(data.timestamp[i]), y:data.fp2[i]});
         }
         loadGraph("tp9");
         loadGraph("tp10");
