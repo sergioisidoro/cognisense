@@ -12,12 +12,13 @@ Patient Zero
 <script type="text/javascript" src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
 
   <div class="container">
+    <div class="row"> <div class="col-xs-12"> <h3 id="aware"></h3></div></div>
     <div id="dashboard" class="row">
         <div class="col-md-6">
           <div class="box">
             <div class="box-content">
               <div class="box-header">
-                  <span>EEG Data - TP9 historic data </span>
+                  <span>EEG Data - TP9 </span>
               </div>
               <div class="box-content">
                 <div id='tp9'>
@@ -31,7 +32,7 @@ Patient Zero
         <div class="box">
           <div class="box-content">
             <div class="box-header">
-                <span>EEG Data - TP10 historic data </span>
+                <span>EEG Data - TP10</span>
             </div>
             <div class="box-content">
               <div id='tp10'>
@@ -47,7 +48,7 @@ Patient Zero
           <div class="box">
             <div class="box-content">
               <div class="box-header">
-                  <span>EEG Data - FP1 historic data </span>
+                  <span>EEG Data - FP1</span>
               </div>
               <div class="box-content">
                 <div id='fp1'>
@@ -61,7 +62,7 @@ Patient Zero
         <div class="box">
           <div class="box-content">
             <div class="box-header">
-                <span>EEG Data - FP2 historic data </span>
+                <span>EEG Data - FP2</span>
             </div>
             <div class="box-content">
               <div id='fp2'>
@@ -102,7 +103,9 @@ Patient Zero
       color: '#0048e8'
   };
 
-  var chart = nv.models.lineWithFocusChart();
+  var chart = nv.models.cumulativeLineChart();
+  d3.rebind('useVoronoi');
+  chart.useVoronoi(false);
 
   chart.yAxis
       .tickFormat(d3.format(',.2f'));
@@ -118,6 +121,7 @@ Patient Zero
   };
 
   function update_data(data) {
+    console.log(data)
     // This is Shameful coding ! I'm sorry!
     for (i = 0; i < data.timestamps.length; i++) {
       tp9.values.push({x: data.timestamps[i], y:data.tp9[i]});
@@ -159,5 +163,19 @@ Patient Zero
         loadGraph("fp2");
       }
   }
+
+  var source_foucs = new EventSource('http://localhost:5000/event_listener/patient1_focus');
+  console.log("I'm listening to focus");
+  source_foucs.onmessage = function (event) {
+      if (event.data > 0.7){
+        var somethin = document.getElementById('aware')
+        somethin.innerHTML = "AWARE"
+      }
+      else {
+        var somethin = document.getElementById('aware')
+        somethin.innerHTML = "NOT AWARE"
+      }
+  }
+
 </script>
 {% endblock %}

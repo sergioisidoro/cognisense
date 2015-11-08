@@ -21,7 +21,9 @@
             <div class="header">
                 <div class="logo">
                     <a href="{{ url_for("dendrite.index") }}">
-                        <span class="app-name">Dendrite</span>
+                        <div class="app-name">
+                          <img class="img-responsive" src="{{ url_for(".static", filename="images/logo.png")}}">
+                        </div>
                     </a>
                 </div>
                 <div class="top-nav">

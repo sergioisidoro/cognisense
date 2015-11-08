@@ -41,10 +41,9 @@ class DataBlock(Resource):
 
     def post(self, todo_id):
         if request.data:
-
             red.publish("patient1", request.data)
             data = json.loads(request.data)
-            timestamp_data = data.pop("timestamps", None)
+            timestamp_data = data.pop("timestamps", [])
             data_type = data.pop("type", None)
 
             return_message = MESSAGE

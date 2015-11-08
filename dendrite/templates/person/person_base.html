@@ -2,6 +2,8 @@
 
 {% block subsection %}
 <h6>
+<a href="{{ url_for('person.details', uid=1)}}">
+  Patient Details</a> -
 <a href="{{ url_for('person.live', uid=1)}}">
   Live stream</a> -
 <a href="{{ url_for('person.histoy_detail', uid=1)}}">
