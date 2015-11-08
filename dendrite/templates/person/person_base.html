@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block subsection %}
+<h6>
+<a href="{{ url_for('person.live', uid=1)}}">
+  Live stream</a> -
+<a href="{{ url_for('person.histoy_detail', uid=1)}}">
+    Medical History</a> -
+<a href="{{ url_for('person.diagnostics', uid=1)}}">
+  Automatic diagnostics</a>
+</h6>
+{% endblock %}

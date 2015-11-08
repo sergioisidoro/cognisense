@@ -17,7 +17,7 @@ Patient Zero
           <div class="box">
             <div class="box-content">
               <div class="box-header">
-                  <span>EEG Data - TP9 </span>
+                  <span>EEG Data - TP9 historic data </span>
               </div>
               <div class="box-content">
                 <div id='tp9'>
@@ -31,7 +31,7 @@ Patient Zero
         <div class="box">
           <div class="box-content">
             <div class="box-header">
-                <span>EEG Data - TP10</span>
+                <span>EEG Data - TP10 historic data </span>
             </div>
             <div class="box-content">
               <div id='tp10'>
@@ -47,7 +47,7 @@ Patient Zero
           <div class="box">
             <div class="box-content">
               <div class="box-header">
-                  <span>EEG Data - FP1</span>
+                  <span>EEG Data - FP1 historic data </span>
               </div>
               <div class="box-content">
                 <div id='fp1'>
@@ -61,7 +61,7 @@ Patient Zero
         <div class="box">
           <div class="box-content">
             <div class="box-header">
-                <span>EEG Data - FP2</span>
+                <span>EEG Data - FP2 historic data </span>
             </div>
             <div class="box-content">
               <div id='fp2'>
@@ -102,7 +102,7 @@ Patient Zero
       color: '#0048e8'
   };
 
-  var chart = nv.models.cumulativeLineChart();
+  var chart = nv.models.lineWithFocusChart();
   d3.rebind('useVoronoi');
   chart.useVoronoi(false);
 

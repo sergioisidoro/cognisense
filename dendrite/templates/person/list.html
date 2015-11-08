@@ -19,7 +19,7 @@
                       {% for person in people %}
                       <tr>
                           <td>
-                            <a href="{{ url_for('person.detail', uid=person.uid) }}">
+                            <a href="{{ url_for('person.live', uid=person.uid) }}">
                               {{ person.signature_name.decode("utf-8") }}
                             </a>
                           </td>

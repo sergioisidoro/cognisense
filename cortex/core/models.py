@@ -45,7 +45,7 @@ class DataBlock(Document, CortexDocument):
     data = ListField(FloatField())
 
     def __unicode__(self):
-        return self.signature_name
+        return "%s-%s" % (self.channel_name, self.channel_type)
 
     meta = {
         'allow_inheritance': True,

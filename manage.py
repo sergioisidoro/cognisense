@@ -10,7 +10,7 @@ from dendrite.blueprint import dendrite
 from dendrite.views.person import person_blueprint
 from mongoengine import *
 
-connect('tumblelog')
+connect('cognisense')
 
 logger = getLogger('watson.run')
 
