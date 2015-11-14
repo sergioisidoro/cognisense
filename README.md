@@ -8,7 +8,7 @@ It consists of a basic platform for inputing, saving, and running procesing/ML s
 Flask + redis + mongodb + Pybrain + NVD3
 
 ```
-Post --> Flask --> Redis pubsub ---------- Dendrite (flask) realtime -------- Dendrite diagnostics
+Post --> Flask --> Redis pubsub ---------- Dendrite realtime data -------- live diagnostics
             \                   \ -------- Diagnostics (PyBrain)------------------ /
              \--- MongoDb                   
 ```
@@ -27,6 +27,11 @@ This was a demo, so everything is using default localhost machine settings.
 See this more as a scaffold for a future project.
 
 ## Acknowledgements:
+The Awesome team of the Hackathon:
+https://github.com/sergioisidoro (Backend)
+https://www.facebook.com/dalund (Android dev)
+https://github.com/Staphylococcus (Identity, marketing, and design)
+
 Some styles used from psdash (CC0 1.0 Universal) - https://github.com/Jahaja/psdash
 Thanks man :)
 
