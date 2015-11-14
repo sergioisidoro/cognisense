@@ -23,14 +23,19 @@ We used Muse (http://www.choosemuse.com/) to aquire EEG data to an Android devic
 
 ## TO DO
 A lot(!) of stuff.
+
 This was a demo, so everything is using default localhost machine settings. 
+
 See this more as a scaffold for a future project.
 
 ## Acknowledgements:
-The Awesome team of the Hackathon:
-https://github.com/sergioisidoro (Backend)
+# The Awesome team of the Hackathon:
+https://github.com/sergioisidoro (Backend) 
+
 https://www.facebook.com/dalund (Android dev)
+
 https://github.com/Staphylococcus (Identity, marketing, and design)
+
 
 Some styles used from psdash (CC0 1.0 Universal) - https://github.com/Jahaja/psdash
 Thanks man :)
